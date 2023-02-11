@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using MelissaData;
 
-namespace MelissaDataEmailObjectLinuxNETSample
+namespace MelissaEmailObjectLinuxDotnet
 {
   class Program
   {
@@ -50,8 +50,8 @@ namespace MelissaDataEmailObjectLinuxNETSample
 
     static void RunAsConsole(string license, string testEmail, string dataPath)
     {
-      Console.WriteLine("\n\n========== WELCOME TO MELISSA DATA EMAIL LINUX NET SAMPLE ==========\n");
-
+      Console.WriteLine("\n\n=============== WELCOME TO MELISSA EMAIL LINUX DOTNET ==============\n");
+      
       EmailObject emailObject = new EmailObject(license, dataPath);
 
       bool shouldContinueRunning = true;
@@ -131,17 +131,17 @@ namespace MelissaDataEmailObjectLinuxNETSample
           }
         }
       }
-      Console.WriteLine("\n============ THANK YOU FOR USING MELISSA DATA NET OBJECT ===========\n");
+      Console.WriteLine("\n============ THANK YOU FOR USING MELISSA DOTNET OBJECT ===========\n");
     }
   }
 
   class EmailObject
   {
-    // Path to email object data files (.dat, etc)
+    // Path to Email Object data files (.dat, etc)
     string dataFilePath;
     //private readonly string dataFilePath = @"C:\Program Files\Melissa DATA\DQT\Data";
 
-    // Create instance of Melissa Data Email Object
+    // Create instance of Melissa Email Object
     public mdEmail mdEmailObj = new mdEmail();
 
     public EmailObject(string license, string dataPath)
@@ -165,7 +165,7 @@ namespace MelissaDataEmailObjectLinuxNETSample
       Console.WriteLine($"              Expiration Date: {mdEmailObj.GetLicenseStringExpirationDate()}");
 
       /**
-       * This number should match with file properties of the Melissa Data Object binary file.
+       * This number should match with file properties of the Melissa Object binary file.
        * If TEST appears with the build number, there may be a license key issue.
        */
       Console.WriteLine($"               Object Version: {mdEmailObj.GetBuildNumber()}\n");
@@ -174,7 +174,7 @@ namespace MelissaDataEmailObjectLinuxNETSample
     // This will call the lookup function to process the input email as well as generate the result codes
     public void ExecuteObjectAndResultCodes(ref DataContainer data)
     {
-      // These are the configuarble pieces of the email object. We are setting what kind of information we want to be looked up
+      // These are the configuarble pieces of the Email Object. We are setting what kind of information we want to be looked up
       mdEmailObj.SetCacheUse(1);
       mdEmailObj.SetCorrectSyntax(true);
       mdEmailObj.SetDatabaseLookup(true);
@@ -186,8 +186,8 @@ namespace MelissaDataEmailObjectLinuxNETSample
       mdEmailObj.VerifyEmail(data.Email);
       data.ResultCodes = mdEmailObj.GetResults();
 
-      // ResultsCodes explain any issues email object has with the object.
-      // List of result codes for Email object
+      // ResultsCodes explain any issues Email Object has with the object.
+      // List of result codes for Email Object
       // https://wiki.melissadata.com/?title=Result_Code_Details#Email_Object
     }
   }

@@ -3,10 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# EmailObject
+# Email Object
 [Mm]elissa[Uu]pdater/
-[Mm]elissa[Dd]ata[Ee]mail[Oo]bject[Ll]inux[Nn][Ee][Tt][Ee]xample/[Dd]ata
-[Mm]elissa[Dd]ata[Ee]mail[Oo]bject[Ll]inux[Nn][Ee][Tt][Ee]xample/[Bb]uild
+[Mm]elissa[Ee]mail[Oo]bject[Ll]inux[Dd]otnet/[Dd]ata
+[Mm]elissa[Ee]mail[Oo]bject[Ll]inux[Dd]otnet/[Bb]uild
+
 *.cac
 *.so
 *.dll
