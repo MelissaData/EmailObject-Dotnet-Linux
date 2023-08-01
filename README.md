@@ -10,21 +10,20 @@ For the latest Melissa Email Object release notes, please visit: https://release
 
 The console will ask the user for:
 
-- Email Address
+- Email
 
 And return 
 
-- Mail Box Name
+- Mailbox Name
 - Domain Name
 - Top-Level Domain Name
 - Top-Level Domain Description
-- ResultCodes
+- Result Codes
 
 ## Tested Environments
 
-- Linux 64-bit .NET 7.0, .NET 5.0, .NET Core 3.1
-- Ubuntu 20.04.05 LTS
-- Melissa data files for 2023-06
+- Linux 64-bit .NET 7.0, Ubuntu 20.04.05 LTS
+- Melissa data files for 2023-07
 
 ## Required File(s) and Programs
 
@@ -39,8 +38,6 @@ This is the code of the Melissa Object.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-This project is compatible with .NET 7.0, .NET 5.0, and .NET Core 3.1. If you would like to run this project for any other version besides .NET 7.0, proceed with the following procedures but check for and download your desired .NET version.
 
 #### Install the Dotnet Core SDK
 Before starting, check to see if you already have the .NET 7.0 SDK already installed by entering this command:
@@ -74,7 +71,7 @@ Once all of this is done, you should be able to verify that the SDK is installed
 
 #### Download this project
 ```
-$ git clone https://github.com/MelissaData/EmailObject-Dotnet-Linux.git
+$ git clone https://github.com/MelissaData/EmailObject-Dotnet-Linux
 $ cd EmailObject-Dotnet-Linux
 ```
 
@@ -109,22 +106,7 @@ Melissa Updater is a CLI application allowing the user to update their Melissa a
 	- Use the location of where you copied/installed the data and update the "DataPath" variable in the bash script.
 	- Copy all the .so file(s) mentioned above into the `MelissaEmailObjectLinuxDotnet` project folder.
 
-----------------------------------------
-
-#### Configure Target Framework
-
-Depending on your target .NET framework, you may need to configure the bash script. In order to do this, open up the `MelissaEmailObjectLinuxDotnet.sh` for editing, proceed to the bottom of the script where you will find this section of code.
-
-Default set for .NET 7.0
-```
-dotnet publish -f="net7.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
-#dotnet publish -f="net5.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
-#dotnet publish -f="netcoreapp3.1" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
-```
-The target framework is specified with the -f flag found in the command line. If you wish to use any version besides .NET 7.0, please uncomment the line containing that framework and comment out the line containing the .NET 7.0 framework (# to comment).
-
 #### Change Bash Script Permissions
-
 To be able to run the bash script, you must first make it an executable using the command:
 
 `chmod +x MelissaEmailObjectLinuxDotnet.sh`
@@ -132,7 +114,6 @@ To be able to run the bash script, you must first make it an executable using th
 As an indicator, the filename will change colors once it becomes an executable.
 
 ## Run Bash Script
-
 Parameters:
 - -e or --email: a test email address
  	
@@ -149,32 +130,30 @@ When you have modified the script to match your data location, let's run the scr
 	```
 	$ ./MelissaEmailObjectLinuxDotnet.sh
 	```
-    For quiet mode:
-    ```
-    $ ./MelissaEmailObjectLinuxDotnet.sh --quiet
-    ```
+  For quiet mode:
+  ```
+  $ ./MelissaEmailObjectLinuxDotnet.sh --quiet
+  ```
 - Command Line 
 
 	You can pass an email address in ```--email``` parameter and a license string in ```--license``` parameter to test Email Object. For example:
-	```
-    $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com"
-    $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>"
-    ```
+  ```
+  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com"
+  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>"
+  ```
 	For quiet mode:
-    ```
-    $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --quiet
-    $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>" --quiet
-    ```
+  ```
+  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --quiet
+  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>" --quiet
+  ```
 This is the expected output from a successful setup for interactive mode:
 
 ![alt text](/screenshots/output.png)
 
 ## Troubleshooting
-
 Troubleshooting for errors found while running your program.
 
 ### C# Errors:
-
 | Error      | Description |
 | ----------- | ----------- |
 | ErrorRequiredFileNotFound      | Program is missing a required file. Please check your Data folder and refer to the list of required files above. If you are unable to obtain all required files through the Melissa Updater, please contact technical support below. |
@@ -183,7 +162,6 @@ Troubleshooting for errors found while running your program.
 | ErrorLicenseExpired   | Expired license string. Please contact technical support below. |
 
 ## Contact Us
-
 For free technical support, please call us at 800-MELISSA ext. 4 (800-635-4772 ext. 4) or email us at tech@melissa.com.
 
 To purchase this product, contact the Melissa sales department at 800-MELISSA ext. 3 (800-635-4772 ext. 3).

@@ -43,7 +43,7 @@ done
 
 ######################### Config ###########################
 
-RELEASE_VERSION='2023.06'
+RELEASE_VERSION='2023.07'
 ProductName="DQ_EMAIL_DATA"
 
 # Uses the location of the .ps1 file 
@@ -70,6 +70,13 @@ Config_OS="LINUX"
 Config_Compiler="GCC48"
 Config_Architecture="64BIT"
 Config_Type="BINARY"
+
+Wrapper_FileName="mdEmail_cSharpCode.cs"
+Wrapper_ReleaseVersion=$RELEASE_VERSION
+Wrapper_OS="ANY"
+Wrapper_Compiler="NET"
+Wrapper_Architecture="ANY"
+Wrapper_Type="INTERFACE"
 
 ######################## Functions #########################
 DownloadDataFiles()
@@ -113,6 +120,31 @@ DownloadSO()
   printf "Melissa Updater finished downloading $ConfigFileName!\n"
 }
 
+DownloadWrapper() 
+{
+    printf "\nMELISSA UPDATER IS DOWNLOADING WRAPPER(s)...\n"
+    
+    # Check for quiet mode
+    if [ $quiet == "true" ];
+    then
+        ./MelissaUpdater/MelissaUpdater file --filename $Wrapper_FileName --release_version $Wrapper_ReleaseVersion --license $1 --os $Wrapper_OS --compiler $Wrapper_Compiler --architecture $Wrapper_Architecture --type $Wrapper_Type --target_directory $ProjectPath &> /dev/null
+        if [ $? -ne 0 ];
+        then
+            printf "\nCannot run Melissa Updater. Please check your license string!\n"
+            exit 1
+        fi
+    else
+        ./MelissaUpdater/MelissaUpdater file --filename $Wrapper_FileName --release_version $Wrapper_ReleaseVersion --license $1 --os $Wrapper_OS --compiler $Wrapper_Compiler --architecture $Wrapper_Architecture --type $Wrapper_Type --target_directory $ProjectPath 
+        if [ $? -ne 0 ];
+        then
+            printf "\nCannot run Melissa Updater. Please check your license string!\n"
+            exit 1
+        fi
+    fi
+    
+    printf "Melissa Updater finished downloading $Config_FileName!\n"
+}
+
 CheckSOs() 
 {
     if [ ! -f $BuildPath/$Config_FileName ];
@@ -125,7 +157,7 @@ CheckSOs()
 
 ########################## Main ############################
 
-printf "\n======================= Melissa Email Object =======================\n                    [ .NET | Linux | 64BIT ]\n"
+printf "\n======================= Melissa Email Object =======================\n                      [ .NET | Linux | 64BIT ]\n"
 
 # Get license (either from parameters or user input)
 if [ -z "$license" ];
@@ -162,6 +194,9 @@ DownloadDataFiles $license      # comment out this line if using DQS Release
 # Download SO(s)
 DownloadSO $license
 
+# Download wrapper(s)
+DownloadWrapper $license
+
 # Check if all SO(s) have been downloaded. Exit script if missing
 printf "\nDouble checking SO file(s) were downloaded...\n"
 
@@ -182,11 +217,8 @@ printf "All file(s) have been downloaded/updated!\n"
 # Start program
 # Build project
 printf "\n=========================== BUILD PROJECT ==========================\n"
-# Target frameworks net7.0, net5.0, netcoreapp3.1
-# Please comment out the version that you don't want to use and uncomment the one that you do want to use
+
 dotnet publish -f="net7.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
-#dotnet publish -f="net5.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
-#dotnet publish -f="netcoreapp3.1" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
 
 # Run project
 if [ -z "$email" ];
