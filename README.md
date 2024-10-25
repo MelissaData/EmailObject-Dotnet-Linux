@@ -25,7 +25,7 @@ And return
 ## Tested Environments
 
 - Linux 64-bit .NET 7.0, Ubuntu 20.04.05 LTS
-- Melissa data files for 2024-09
+- Melissa data files for 2024-10
 
 ## Required File(s) and Programs
 
@@ -73,8 +73,8 @@ Once all of this is done, you should be able to verify that the SDK is installed
 
 #### Download this project
 ```
-$ git clone https://github.com/MelissaData/EmailObject-Dotnet-Linux
-$ cd EmailObject-Dotnet-Linux
+git clone https://github.com/MelissaData/EmailObject-Dotnet-Linux
+cd EmailObject-Dotnet-Linux
 ```
 
 #### Set up Melissa Updater 
@@ -130,25 +130,25 @@ Parameters:
 When you have modified the script to match your data location, let's run the script. There are two modes:
 - Interactive 
 
-	The script will prompt the user for an email address, then use the provided email to test Email Object. For example:
-	```
-	$ ./MelissaEmailObjectLinuxDotnet.sh
-	```
+  The script will prompt the user for an email address, then use the provided email to test Email Object. For example:
+  ```
+  ./MelissaEmailObjectLinuxDotnet.sh
+  ```
   For quiet mode:
   ```
-  $ ./MelissaEmailObjectLinuxDotnet.sh --quiet
+  ./MelissaEmailObjectLinuxDotnet.sh --quiet
   ```
 - Command Line 
 
-	You can pass an email address in ```--email``` parameter and a license string in ```--license``` parameter to test Email Object. For example:
+  You can pass an email address in ```--email``` parameter and a license string in ```--license``` parameter to test Email Object. For example:
   ```
-  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com"
-  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>"
+  ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com"
+  ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>"
   ```
-	For quiet mode:
+  For quiet mode:
   ```
-  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --quiet
-  $ ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>" --quiet
+  ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --quiet
+  ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "<your_license_string>" --quiet
   ```
 This is the expected output from a successful setup for interactive mode:
 
