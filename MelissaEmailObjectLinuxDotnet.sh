@@ -53,7 +53,7 @@ done
 
 ######################### Config ###########################
 
-RELEASE_VERSION='2025.05'
+RELEASE_VERSION='2025.06'
 ProductName="DQ_EMAIL_DATA"
 
 # Uses the location of the .ps1 file 
@@ -245,7 +245,7 @@ printf "All file(s) have been downloaded/updated!\n"
 # Build project
 printf "\n=========================== BUILD PROJECT ==========================\n"
 
-dotnet publish -f="net7.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
+dotnet publish -f="net8.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
 
 # Run project
 if [ -z "$email" ];
