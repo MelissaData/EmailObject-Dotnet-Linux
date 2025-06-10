@@ -48,7 +48,7 @@ Before starting, check to see if you already have .NET SDK already installed by 
 
 If .NET SDK is already installed, you should see it in the following list:
 
-![alt text](/screenshots/dotnet_output.png)
+![alt text](/screenshots/dotnet_output.PNG)
 
 To download, run the following commands to add the Microsoft package signing key to your list of trusted keys and add the package repository.
 
