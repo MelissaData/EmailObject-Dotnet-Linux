@@ -53,7 +53,7 @@ done
 
 ######################### Config ###########################
 
-RELEASE_VERSION='2025.06'
+RELEASE_VERSION='2025.07'
 ProductName="DQ_EMAIL_DATA"
 
 # Uses the location of the .ps1 file 
