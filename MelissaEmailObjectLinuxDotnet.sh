@@ -1,7 +1,36 @@
 #!/bin/bash
 
-# Name:    MelissaEmailObjectLinuxDotnet
-# Purpose: Use the MelissaUpdater to make the MelissaEmailObjectWindowsDotnet code usable
+# MelissaEmailObjectLinuxDotnet
+#
+# Downloads the required components and then builds and runs MelissaEmailObjectLinuxDotnet.
+#
+# This script uses the Melissa Updater to fetch the data file(s), the shared object, and the
+# C# wrapper, verifies the shared object downloaded, then builds the .NET project and runs it
+# against the supplied email address.
+#
+# Overall flow:
+#   1. Read parameters / prompt for the license and data path.
+#   2. Download data file(s), the shared object, and the wrapper via the Melissa Updater.
+#   3. Confirm the shared object is present.
+#   4. Build the project, then run it (single test email address or interactive).
+#
+# Options:
+#   --email <value>     Email address to verify.
+#   --dataPath <value>  Path to an existing data files directory. If omitted, the script
+#                       prompts for a path; pressing Enter at that prompt skips it and
+#                       downloads the data files into the project's Data folder via the
+#                       Melissa Updater. A path that does not exist aborts the script.
+#   --license <value>   License string. Resolved in this order:
+#                         1. This option.
+#                         2. An interactive prompt, if the option was not supplied.
+#                         3. The MD_LICENSE environment variable, if the prompt was left blank.
+#                       Note that the environment variable is the last resort, not the first:
+#                       running without --license always prompts, even when MD_LICENSE is set.
+#   --quiet             Suppresses the Melissa Updater console output during downloads.
+#
+# Examples:
+#   ./MelissaEmailObjectLinuxDotnet.sh --license "your-license"
+#   ./MelissaEmailObjectLinuxDotnet.sh --email "info@melissa.com" --license "your-license"
 
 ######################### Constants ##########################
 
@@ -53,6 +82,7 @@ done
 
 ######################### Config ###########################
 
+# Product release the updater pulls files for
 RELEASE_VERSION='2026.08'
 ProductName="DQ_EMAIL_DATA"
 
@@ -83,7 +113,7 @@ then
     exit 1
 fi
 
-# Config variables for download file(s)
+# Binary/shared object needed to run the example
 Config_FileName="libmdEmail.so"
 Config_ReleaseVersion=$RELEASE_VERSION
 Config_OS="LINUX"
@@ -91,6 +121,7 @@ Config_Compiler="GCC48"
 Config_Architecture="64BIT"
 Config_Type="BINARY"
 
+# C# wrapper source that exposes the shared object to the .NET project
 Wrapper_FileName="mdEmail_cSharpCode.cs"
 Wrapper_ReleaseVersion=$RELEASE_VERSION
 Wrapper_OS="ANY"
@@ -99,6 +130,7 @@ Wrapper_Architecture="ANY"
 Wrapper_Type="INTERFACE"
 
 ######################## Functions #########################
+# Download the product data file(s) into $DataPath via the Melissa Updater.
 DownloadDataFiles()
 {
   printf "========================== MELISSA UPDATER =========================\n"
@@ -115,6 +147,7 @@ DownloadDataFiles()
   printf "Melissa Updater finished downloading data file(s)!\n"
 }
 
+# Download the shared object into the Build folder.
 DownloadSO()
 {
   printf "MELISSA UPDATER IS DOWNLOADING SO(S)...\n"
@@ -140,6 +173,7 @@ DownloadSO()
   printf "Melissa Updater finished downloading $ConfigFileName!\n"
 }
 
+# Download the C# wrapper source into the project folder.
 DownloadWrapper() 
 {
     printf "\nMELISSA UPDATER IS DOWNLOADING WRAPPER(S)...\n"
@@ -165,6 +199,7 @@ DownloadWrapper()
     printf "Melissa Updater finished downloading $Wrapper_FileName!\n"
 }
 
+# Verify the expected shared object landed in the Build folder
 CheckSOs() 
 {
     if [ ! -f $BuildPath/$Config_FileName ];
@@ -245,7 +280,7 @@ printf "All file(s) have been downloaded/updated!\n"
 # Build project
 printf "\n=========================== BUILD PROJECT ==========================\n"
 
-dotnet publish -f="net8.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
+dotnet publish -f="net10.0" -c Release -o $BuildPath MelissaEmailObjectLinuxDotnet/MelissaEmailObjectLinuxDotnet.csproj
 
 # Run project
 if [ -z "$email" ];
